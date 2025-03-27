@@ -21,7 +21,9 @@
 					"name": "Montserrat",
 					"slug": "Montserrat"
 				}
-			]
+			],
+			"fontSizes": [],
+			"fluidTypography": true
 		},
 		"useRootPaddingAwareAlignments": true
 	},
@@ -32,7 +34,7 @@
 		"elements": {
 			"body": {
 				"typography": {
-					"fontSize": "16px",
+					"fontSize": "clamp(1rem, 2vw, 1.125rem)", 
 					"lineHeight": "1.6"
 				}
 			},
@@ -40,6 +42,36 @@
 				"typography": {
 					"fontFamily": "var(--wp--preset--font-family--Montserrat)",
 					"fontWeight": "700"
+				}
+			},
+			"h1": {
+				"typography": {
+					"fontSize": "clamp(2rem, 5vw, 3rem)"
+				}
+			},
+			"h2": {
+				"typography": {
+					"fontSize": "clamp(1.75rem, 4vw, 2.5rem)"
+				}
+			},
+			"h3": {
+				"typography": {
+					"fontSize": "clamp(1.5rem, 3vw, 2rem)"
+				}
+			},
+			"h4": {
+				"typography": {
+					"fontSize": "clamp(1.25rem, 2.5vw, 1.75rem)"
+				}
+			},
+			"h5": {
+				"typography": {
+					"fontSize": "clamp(1.125rem, 2vw, 1.5rem)"
+				}
+			},
+			"h6": {
+				"typography": {
+					"fontSize": "clamp(1rem, 1.75vw, 1.25rem)"
 				}
 			}
 		}
