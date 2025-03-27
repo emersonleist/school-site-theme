@@ -81,7 +81,7 @@ function theme_widgets_init() {
 }
 add_action('widgets_init', 'theme_widgets_init');
 
-<?php
+
 function theme_enqueue_styles() {
     // Enqueue Normalize CSS from a CDN
     wp_enqueue_style('normalize-css', 'https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css', [], null);
@@ -90,4 +90,4 @@ function theme_enqueue_styles() {
     wp_enqueue_style('my-theme-style', get_stylesheet_uri());
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
-?>
+
