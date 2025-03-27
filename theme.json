@@ -17,9 +17,9 @@
 					"slug": "system-font"
 				},
 				{
-					"fontFamily": "'Poppins', sans-serif",
-					"name": "Poppins",
-					"slug": "poppins"
+					"fontFamily": "'Montserrat', sans-serif",
+					"name": "Montserrat",
+					"slug": "Montserrat"
 				}
 			]
 		},
@@ -27,7 +27,7 @@
 	},
 	"styles": {
 		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--poppins)"
+			"fontFamily": "var(--wp--preset--font-family--Montserrat)"
 		},
 		"elements": {
 			"body": {
@@ -38,7 +38,7 @@
 			},
 			"headings": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--poppins)",
+					"fontFamily": "var(--wp--preset--font-family--Montserrat)",
 					"fontWeight": "700"
 				}
 			}
