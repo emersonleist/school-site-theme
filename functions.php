@@ -91,3 +91,10 @@ function theme_enqueue_styles() {
 }
 add_action('wp_enqueue_scripts', 'theme_enqueue_styles');
 
+
+// Enable theme support for site icon (favicon)
+function theme_add_site_icon_support() {
+    add_theme_support('site-icon');
+}
+add_action('after_setup_theme', 'theme_add_site_icon_support');
+
