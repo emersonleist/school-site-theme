@@ -114,3 +114,76 @@ function enqueue_lightgallery_scripts() {
     ");
 }
 add_action('wp_enqueue_scripts', 'enqueue_lightgallery_scripts');
+
+function register_students_cpt() {
+    $labels = array(
+        'name' => 'Students',
+        'singular_name' => 'Student',
+        'add_new_item' => 'Add New Student',
+        'edit_item' => 'Edit Student',
+        'new_item' => 'New Student',
+        'view_item' => 'View Student',
+        'search_items' => 'Search Students',
+        'not_found' => 'No students found',
+        'not_found_in_trash' => 'No students found in Trash',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'public' => true,
+        'has_archive' => true,
+        'menu_icon' => 'dashicons-id',
+        'supports' => array('title', 'editor', 'thumbnail'),
+        'show_in_rest' => true,
+        'template' => array(
+            array('core/paragraph', array(
+                'placeholder' => 'Enter a short biography here...'
+            )),
+            array('core/button', array(
+                'text' => 'View Portfolio'
+            )),
+        ),
+        'template_lock' => 'all', // Prevent adding/removing/moving blocks
+    );
+
+    register_post_type('students', $args);
+}
+add_action('init', 'register_students_cpt');
+
+function register_student_taxonomy() {
+    $labels = array(
+        'name' => 'Programs',
+        'singular_name' => 'Program',
+        'search_items' => 'Search Programs',
+        'all_items' => 'All Programs',
+        'edit_item' => 'Edit Program',
+        'update_item' => 'Update Program',
+        'add_new_item' => 'Add New Program',
+        'new_item_name' => 'New Program Name',
+        'menu_name' => 'Programs',
+    );
+
+    $args = array(
+        'labels' => $labels,
+        'hierarchical' => true, // Makes it act like categories
+        'show_in_rest' => true,
+        'public' => true,
+    );
+
+    register_taxonomy('student_program', array('students'), $args);
+}
+add_action('init', 'register_student_taxonomy');
+
+function student_title_placeholder_script($hook) {
+    $screen = get_current_screen();
+    if ($screen->post_type === 'students') {
+        wp_enqueue_script(
+            'student-title-placeholder',
+            get_template_directory_uri() . '/js/student-title-placeholder.js',
+            array('wp-dom-ready', 'wp-edit-post'),
+            null,
+            true
+        );
+    }
+}
+add_action('admin_enqueue_scripts', 'student_title_placeholder_script');
