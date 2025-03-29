@@ -98,3 +98,19 @@ function theme_add_site_icon_support() {
 }
 add_action('after_setup_theme', 'theme_add_site_icon_support');
 
+function enqueue_lightgallery_scripts() {
+    wp_enqueue_script('lightgallery', 'https://cdn.jsdelivr.net/npm/lightgallery/lightgallery.umd.js', array(), null, true);
+    wp_enqueue_script('lg-zoom', 'https://cdn.jsdelivr.net/npm/lightgallery/plugins/zoom/lg-zoom.umd.js', array('lightgallery'), null, true);
+    wp_enqueue_script('lg-thumbnail', 'https://cdn.jsdelivr.net/npm/lightgallery/plugins/thumbnail/lg-thumbnail.umd.js', array('lightgallery'), null, true);
+    
+    wp_add_inline_script('lightgallery', "
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('lightgallery'), {
+                plugins: [lgZoom, lgThumbnail],
+                licenseKey: 'your_license_key',
+                speed: 500
+            });
+        });
+    ");
+}
+add_action('wp_enqueue_scripts', 'enqueue_lightgallery_scripts');
