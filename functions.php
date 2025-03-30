@@ -140,7 +140,7 @@ function register_students_cpt() {
                 'placeholder' => 'Enter a short biography here...'
             )),
             array('core/button', array(
-                'text' => 'View Portfolio'
+                'text' => 'See My Portfolio'
             )),
         ),
         'template_lock' => 'all', // Prevent adding/removing/moving blocks
