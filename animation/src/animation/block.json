@@ -1,0 +1,14 @@
+{
+    "apiVersion": 2,
+    "name": "fwd-blocks/animated-block",
+    "title": "Animated Block",
+    "category": "layout",
+    "attributes": {
+        "animation": {
+            "type": "string",
+            "default": "fade-up"
+        }
+    },
+    "editorScript": "file:./index.js"
+}
+

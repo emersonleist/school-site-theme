@@ -187,3 +187,15 @@ function student_title_placeholder_script($hook) {
     }
 }
 add_action('admin_enqueue_scripts', 'student_title_placeholder_script');
+
+function enqueue_aos_scripts() {
+    // AOS CSS
+    wp_enqueue_style('aos-css', 'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css', array(), '2.3.4');
+
+    // AOS JS
+    wp_enqueue_script('aos-js', 'https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js', array('jquery'), '2.3.4', true);
+
+    // Initialize AOS
+    wp_enqueue_script('aos-init', get_template_directory_uri() . '/js/aos-init.js', array('aos-js'), null, true);
+}
+add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
