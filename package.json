@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "aos": "^2.3.4",
     "lightgallery": "^2.8.3"
   }
 }
