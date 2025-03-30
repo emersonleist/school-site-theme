@@ -197,3 +197,8 @@ function enqueue_aos_scripts() {
     wp_enqueue_script('aos-init', get_template_directory_uri() . '/js/aos-init.js', array('aos-js'), null, true);
 }
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
+
+function enqueue_aos_init_script() {
+    wp_add_inline_script('aos-js', 'document.addEventListener("DOMContentLoaded", function() { AOS.init({ duration: 1000, once: true }); });', 'after');
+}
+add_action('wp_enqueue_scripts', 'enqueue_aos_init_script');
