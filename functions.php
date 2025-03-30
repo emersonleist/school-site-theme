@@ -174,19 +174,17 @@ function register_student_taxonomy() {
 }
 add_action('init', 'register_student_taxonomy');
 
-function student_title_placeholder_script($hook) {
-    $screen = get_current_screen();
-    if ($screen->post_type === 'students') {
-        wp_enqueue_script(
-            'student-title-placeholder',
-            get_template_directory_uri() . '/js/student-title-placeholder.js',
-            array('wp-dom-ready', 'wp-edit-post'),
-            null,
-            true
-        );
-    }
+function custom_editor_scripts() {
+    wp_enqueue_script(
+        'custom-editor-placeholder',
+        get_template_directory_uri() . '/js/custom-editor-placeholder.js',
+        array('wp-dom-ready', 'wp-data'),
+        null,
+        true
+    );
 }
-add_action('admin_enqueue_scripts', 'student_title_placeholder_script');
+add_action('enqueue_block_editor_assets', 'custom_editor_scripts');
+
 
 function enqueue_aos_scripts() {
     // AOS CSS
