@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       animiate on scroll
+ * Plugin Name:       animate on scroll
  * Description:       animates on scroll
  * Version:           0.1.0
  * Requires at least: 6.7
