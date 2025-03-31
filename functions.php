@@ -199,3 +199,37 @@ function enqueue_aos_scripts() {
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
 require get_theme_file_path()."/custom-blocks/custom-blocks.php";
+
+function lightgalery_script (){
+if ( is_front_page() ) {
+    // Enqueue CSS from a CDN
+    wp_enqueue_style(
+        'lightgallery-css',
+        get_theme_file_uri( 'assets/css/lightgallery-bundle.min.css'),
+        array(),
+        wp_get_theme()->get( 'Version' )
+    );
+    // Enqueue JS from a CDN
+    wp_enqueue_script(
+        'lightgallery-js',
+        get_theme_file_uri( 'assets/js/lightgallery.min.js'),
+        array(),
+        wp_get_theme()->get( 'Version' ),
+        array( 'strategy' => 'defer' )
+    );
+    wp_enqueue_script(
+        'lightgallery-thumbnail-js',
+        get_theme_file_uri( 'assets/js/lg-thumbnail.min.js'),
+        array('lightgallery-js'),
+        wp_get_theme()->get( 'Version' ),
+        array( 'strategy' => 'defer' )
+    );
+    wp_enqueue_script(
+        'lightgallery-settings',
+        get_theme_file_uri( 'assets/js/lightgallery-settings.js'),
+        array( 'lightgallery-js', 'lightgallery-thumbnail-js' ),
+        wp_get_theme()->get( 'Version' ),
+        array( 'strategy' => 'defer' )
+    );
+}}
+add_action ("wp_equeue_script", "lightgalery_script");
