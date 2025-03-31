@@ -198,7 +198,4 @@ function enqueue_aos_scripts() {
 }
 add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
-function enqueue_aos_init_script() {
-    wp_add_inline_script('aos-js', 'document.addEventListener("DOMContentLoaded", function() { AOS.init({ duration: 1000, once: true }); });', 'after');
-}
-add_action('wp_enqueue_scripts', 'enqueue_aos_init_script');
+require get_theme_file_path()."/custom-blocks/custom-blocks.php";
