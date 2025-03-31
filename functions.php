@@ -200,7 +200,7 @@ add_action('wp_enqueue_scripts', 'enqueue_aos_scripts');
 
 require get_theme_file_path()."/custom-blocks/custom-blocks.php";
 
-function lightgalery_script (){
+function lightgallery_script (){
 if ( is_front_page() ) {
     // Enqueue CSS from a CDN
     wp_enqueue_style(
@@ -232,4 +232,4 @@ if ( is_front_page() ) {
         array( 'strategy' => 'defer' )
     );
 }}
-add_action ("wp_equeue_script", "lightgalery_script");
+add_action ("wp_equeue_script", "lightgallery_script");
