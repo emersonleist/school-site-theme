@@ -20,7 +20,7 @@ return array(
 		'attributes' => array(
 			'aosAnimation' => array(
 				'type' => 'string',
-				'default' => 'fade-left'
+				'default' => 'fade-up'
 			)
 		),
 		'textdomain' => 'custom-blocks',
