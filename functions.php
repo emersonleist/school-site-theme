@@ -324,3 +324,10 @@ add_action('init', 'register_staff_taxonomy');
 add_image_size('student-thumb-small', 300, 300, true);
 add_image_size('student-thumb-medium', 600, 600, true);
 
+function add_custom_image_sizes_to_dropdown($sizes) {
+    return array_merge($sizes, array(
+        'student-thumb-small' => __('Student Thumb Small'),
+        'student-thumb-medium' => __('Student Thumb Medium'),
+    ));
+}
+add_filter('image_size_names_choose', 'add_custom_image_sizes_to_dropdown');
