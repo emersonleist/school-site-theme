@@ -316,26 +316,3 @@ function register_staff_taxonomy() {
 }
 add_action('init', 'register_staff_taxonomy');
 
-// Create Staff Members & Assign Taxonomy Terms
-function create_staff_members() {
-    $staff_members = [
-        ['name' => 'Alice Johnson', 'job' => 'Manager', 'email' => 'alice@example.com', 'department' => 'HR'],
-        ['name' => 'Bob Smith', 'job' => 'Developer', 'email' => 'bob@example.com', 'department' => 'IT'],
-        ['name' => 'Carol White', 'job' => 'Designer', 'email' => 'carol@example.com', 'department' => 'Marketing'],
-        ['name' => 'David Brown', 'job' => 'Support', 'email' => 'david@example.com', 'department' => 'Customer Support']
-    ];
-
-    foreach ($staff_members as $staff) {
-        $post_id = wp_insert_post([
-            'post_title'   => $staff['name'],
-            'post_type'    => 'staff',
-            'post_status'  => 'publish',
-            'post_content' => "Job Title: {$staff['job']} \n Email: {$staff['email']}"
-        ]);
-
-        if ($post_id) {
-            wp_set_object_terms($post_id, $staff['department'], 'staff_department');
-        }
-    }
-}
-add_action('init', 'create_staff_members');
