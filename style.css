@@ -14,17 +14,17 @@ Text Domain: school-site-theme
 Tags: 
 */
 /* Change submenu background color */
-.wp-block-navigation-item {
+.wp-block-navigation__container .sub-menu {
     background-color: #333; /* Dark background */
 }
 
 /* Change submenu text color */
-.wp-block-navigation-item li a {
+.wp-block-navigation__container .sub-menu li a {
     color: #fff !important; /* White text */
 }
 
 /* Change submenu hover color */
-.wp-block-navigation-item li a:hover {
+.wp-block-navigation__container .sub-menu li a:hover {
     background-color: #555; /* Darker background on hover */
     color: #ffcc00 !important; /* Yellow text on hover */
 }
