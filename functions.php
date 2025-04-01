@@ -234,9 +234,6 @@ if ( is_front_page() ) {
 }}
 add_action ("wp_equeue_script", "lightgallery_script");
 
-add_image_size('student-thumb-small', 300, 300, true);
-add_image_size('student-thumb-medium', 600, 600, true);
-
 // Register Staff Custom Post Type
 function register_staff_cpt() {
     $labels = [
