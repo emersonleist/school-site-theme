@@ -236,3 +236,106 @@ add_action ("wp_equeue_script", "lightgallery_script");
 
 add_image_size('student-thumb-small', 300, 300, true);
 add_image_size('student-thumb-medium', 600, 600, true);
+
+// Register Staff Custom Post Type
+function register_staff_cpt() {
+    $labels = [
+        'name'               => 'Staff',
+        'singular_name'      => 'Staff Member',
+        'add_new'            => 'Add New Staff Member',
+        'add_new_item'       => 'Add New Staff Member',
+        'edit_item'          => 'Edit Staff Member',
+        'new_item'           => 'New Staff Member',
+        'view_item'          => 'View Staff Member',
+        'search_items'       => 'Search Staff',
+        'not_found'          => 'No Staff found',
+        'not_found_in_trash' => 'No Staff found in Trash',
+    ];
+
+    $args = [
+        'label'               => 'Staff',
+        'labels'              => $labels,
+        'public'              => true,
+        'show_in_rest'        => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-groups',
+        'supports'            => ['title', 'editor', 'thumbnail'],
+        'hierarchical'        => false,
+        'has_archive'         => true,
+        'rewrite'             => ['slug' => 'staff'],
+        'template'            => [
+            ['core/paragraph', ['placeholder' => 'Enter job title...']],
+            ['core/paragraph', ['placeholder' => 'Enter email address...']]
+        ],
+        'template_lock'       => 'all', // Locks the template
+    ];
+
+    register_post_type('staff', $args);
+}
+add_action('init', 'register_staff_cpt');
+
+// Change "Add title" placeholder to "Add staff name"
+function modify_staff_title_placeholder($title, $post) {
+    if ($post->post_type === 'staff') {
+        return 'Add staff name';
+    }
+    return $title;
+}
+add_filter('enter_title_here', 'modify_staff_title_placeholder', 10, 2);
+
+// Register Custom Taxonomy (Departments)
+function register_staff_taxonomy() {
+    $labels = [
+        'name'              => 'Departments',
+        'singular_name'     => 'Department',
+        'search_items'      => 'Search Departments',
+        'all_items'         => 'All Departments',
+        'edit_item'         => 'Edit Department',
+        'update_item'       => 'Update Department',
+        'add_new_item'      => 'Add New Department',
+        'new_item_name'     => 'New Department Name',
+        'menu_name'         => 'Departments',
+    ];
+
+    $args = [
+        'label'             => 'Departments',
+        'labels'            => $labels,
+        'public'            => true,
+        'show_in_rest'      => true,
+        'hierarchical'      => true,
+        'rewrite'           => ['slug' => 'department'],
+        'capabilities'      => [
+            'manage_terms' => 'do_not_allow',
+            'edit_terms'   => 'do_not_allow',
+            'delete_terms' => 'do_not_allow',
+            'assign_terms' => 'edit_posts',
+        ],
+    ];
+
+    register_taxonomy('staff_department', ['staff'], $args);
+}
+add_action('init', 'register_staff_taxonomy');
+
+// Create Staff Members & Assign Taxonomy Terms
+function create_staff_members() {
+    $staff_members = [
+        ['name' => 'Alice Johnson', 'job' => 'Manager', 'email' => 'alice@example.com', 'department' => 'HR'],
+        ['name' => 'Bob Smith', 'job' => 'Developer', 'email' => 'bob@example.com', 'department' => 'IT'],
+        ['name' => 'Carol White', 'job' => 'Designer', 'email' => 'carol@example.com', 'department' => 'Marketing'],
+        ['name' => 'David Brown', 'job' => 'Support', 'email' => 'david@example.com', 'department' => 'Customer Support']
+    ];
+
+    foreach ($staff_members as $staff) {
+        $post_id = wp_insert_post([
+            'post_title'   => $staff['name'],
+            'post_type'    => 'staff',
+            'post_status'  => 'publish',
+            'post_content' => "Job Title: {$staff['job']} \n Email: {$staff['email']}"
+        ]);
+
+        if ($post_id) {
+            wp_set_object_terms($post_id, $staff['department'], 'staff_department');
+        }
+    }
+}
+add_action('init', 'create_staff_members');
