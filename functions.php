@@ -321,4 +321,6 @@ function register_staff_taxonomy() {
 }
 add_action('init', 'register_staff_taxonomy');
 
+add_image_size('student-thumb-small', 300, 300, true);
+add_image_size('student-thumb-medium', 600, 600, true);
 
