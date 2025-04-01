@@ -297,6 +297,19 @@ function register_staff_taxonomy() {
         'menu_name'         => 'Departments',
     ];
 
+    // Allow admins to manage terms, restrict others
+    $capabilities = current_user_can('manage_options') ? [
+        'manage_terms' => 'manage_options', // Admins can manage/edit/delete
+        'edit_terms'   => 'manage_options',
+        'delete_terms' => 'manage_options',
+        'assign_terms' => 'edit_posts',
+    ] : [
+        'manage_terms' => 'do_not_allow',
+        'edit_terms'   => 'do_not_allow',
+        'delete_terms' => 'do_not_allow',
+        'assign_terms' => 'edit_posts',
+    ];
+
     $args = [
         'label'             => 'Departments',
         'labels'            => $labels,
@@ -304,15 +317,11 @@ function register_staff_taxonomy() {
         'show_in_rest'      => true,
         'hierarchical'      => true,
         'rewrite'           => ['slug' => 'department'],
-        'capabilities'      => [
-            'manage_terms' => 'do_not_allow',
-            'edit_terms'   => 'do_not_allow',
-            'delete_terms' => 'do_not_allow',
-            'assign_terms' => 'edit_posts',
-        ],
+        'capabilities'      => $capabilities,
     ];
 
     register_taxonomy('staff_department', ['staff'], $args);
 }
 add_action('init', 'register_staff_taxonomy');
+
 
